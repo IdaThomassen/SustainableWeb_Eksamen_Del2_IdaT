@@ -1,0 +1,1461 @@
+/* ===============
+    CSS VARIABLES
+   =============== */
+:root {
+  /* Colors */
+  --primary: rgb(199, 2, 0);
+  --secondary: rgba(199, 2, 0, 0.25);
+  --primary-light: #FAFAFA;
+  --secondary-light: #3c4043;
+
+  /* Text - Dark Mode Colors */
+  --text: #1E1B1B;
+  --text-light: #1E1B1B;  /*Bruges ikke*/
+
+  /* Backgrounds - Dark Mode */
+  --bg: #FAFAFA;
+  --bg-card: #F1F1F1;
+
+  /* Semantic */
+  /* Semantic */
+  --success: #34a853;
+  --warning: #fbc02d;
+  --error: #ea4335;
+
+  /* Effects */
+  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.3);
+  --radius: 1rem;
+  --transition: transform 0.2s ease;
+}
+
+
+/* ===========
+    CSS FONTS
+   =========== */
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+.dm-sans-bold {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.dm-sans-medium {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* ========================
+    GLOBAL STYLES (LAYOUT)
+   ======================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: poppins-medium, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #FAFAFA;
+  background-image: url('../Images/Baggrund\ -\ kodning\(mini\).svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Prevent background scroll when modal is open */
+
+main {
+  max-width: min(1400px, 95vw);
+  margin: 0 auto;
+  padding: clamp(5rem, 10vw, 8rem) 1rem 6rem; /* Extra padding bottom for bottom nav */
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+span {
+    color: var(--text-light);
+}
+
+h1 {
+  font-family: poppins-bold, sans-serif;
+  font-size: 36px;
+margin-top: 30px;
+  color: var(--text);
+}
+
+h2 {
+  font-family: poppins-semibold, sans-serif;
+  font-size: 20px;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+p {
+    font-family: DM sans-serif-medium, sans-serif;
+    font-size: 16px;
+    color: var(--text);
+}
+
+
+/* =======================
+   ACTIVE FILTERS DISPLAY
+   ======================= */
+
+.active-filters-section {
+  padding: 0 1rem 1rem;
+  margin-top: -1rem; /* Close spacing to games header */
+}
+
+.active-filters-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.active-filters-label {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.active-filters-list {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: var(--primary); /* Rød baggrund */
+  color: var(--primary-light);
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.active-filter-tag:hover {
+  background: var(--secondary); /* Mørkere rød ved hover */
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.active-filter-tag:active {
+  transform: translateY(0);
+}
+
+.filter-remove-icon {
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: 0.25rem;
+  color: var(--primary-light);
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .active-filters-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .active-filters-label {
+    font-size: 0.8rem;
+  }
+  
+  .active-filter-tag {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* =====================
+   BOTTOM NAVIGATION BAR
+   ===================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--primary);
+  border-top: 1px solid rgba(172, 198, 201, 0.2);
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 10px calc(0.5rem + env(safe-area-inset-bottom)) 10px; /* 10px yderste margin */
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: var(--text-light);
+  transition: var(--transition);
+  border-radius: 0.75rem;
+  flex: 1;
+  text-align: center;
+}
+
+.bottom-nav-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  transition: var(--transition);
+}
+
+.bottom-nav-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.bottom-nav-item:hover {
+  color: var(--primary);
+  background: rgba(199, 2, 0, 0.1);
+}
+
+.bottom-nav-item:hover .bottom-nav-icon {
+  transform: scale(1.1);
+}
+
+.bottom-nav-active {
+  color: var(--primary) !important;
+  background: rgba(199, 2, 0, 0.15);
+}
+
+.bottom-nav-active .bottom-nav-icon {
+  transform: scale(1.1);
+}
+
+/* ===========================================
+   NO FAVORITES MESSAGE + NO PROFILE MESSAGAE
+   =========================================== */
+.no-favorites {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 2rem 0;
+}
+
+.no-favorites h3 {
+  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.no-favorites p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.no-profile {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin: 2rem 0;
+}
+.no-profile h3 {
+  color: var(--text);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.no-profile p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+
+/* ============================================================
+   FILTERBAR (SØG/SORT/FILTER/PLAYTIME/RATING-FILTER/RYD-KNAP)
+   ===================== */
+.filterbar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+#search-input {
+  flex: 1;
+  min-width: 120px;
+}
+
+#search-input,
+#genre-select,
+#sort-select {
+  background: var(--bg-card);
+  color: var(--text-light);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+#search-input:focus,
+#genre-select:focus,
+#sort-select:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
+}
+
+#search-input::placeholder {
+  color: var(--text-light);
+  opacity: 1;
+}
+
+#genre-select,
+#sort-select {
+  min-width: 160px;
+  cursor: pointer;
+}
+
+/* Playtime filter styling */
+.playtime-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.playtime-filter label {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.playtime-filter input {
+  width: 80px;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.playtime-filter input:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
+}
+
+/* Rating filter styling */
+.rating-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.rating-filter label {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+.rating-filter input {
+  width: 80px;
+  background: var(--bg-card);
+  color: var(--text-light);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.rating-filter input:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
+}
+
+/* Ryd-knap styling */
+
+#clear-filters {
+  background: var(--bg-card);
+  color: var(--text-light);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#clear-filters:hover {
+  background: var(--error);
+  color: white;
+  border-color: var(--error);
+  transform: translateY(-2px);
+}
+
+#clear-filters:focus {
+  outline: 2px solid var(--secondary);
+  border-color: var(--secondary);
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+}
+/* Range grupper */
+.range-group {
+  flex: 1;
+}
+
+.range-label {
+  margin-bottom: 0.5rem;
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.range-separator {
+  color: var(--secondary);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* ============================
+   HEADER DESIGN OG FILTRERING
+   ============================= */
+
+  header {
+  background: #FAFAFA;
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(172, 198, 201, 0.2);
+  color: var(--text);
+  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.logo {
+  height: 80px;
+  margin-left: 1rem;
+  justify-self: start;
+}
+
+/* LOKATIONS DROPDOWN I MIDTEN */
+.header-location {
+  justify-self: center;
+}
+
+.header-location select {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  transition: var(--transition);
+  min-width: 180px;
+  background: var(--bg-card);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  color: var(--text);
+}
+
+.header-location select:hover {
+  border-color: var(--primary);
+}
+
+.header-location select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(199, 2, 0, 0.1);
+}
+
+/* HEADER CONTROLS (SEARCH + FILTER) */  /* Højre side af header */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 2rem;
+  justify-self: end;
+}
+
+.header-search {
+  position: relative;
+}
+
+.header-search input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 1rem;
+  width: 300px;
+  transition: var(--transition);
+}
+
+.header-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(199, 2, 0, 0.1);
+}
+
+/* Filtrering-ikon styling */
+.filter-icon {
+  width: 24px;
+  height: 24px;
+  transition: var(--transition);
+}
+
+/* Filtrering toggle button */
+.filter-toggle {
+  position: relative;
+  background: var(--bg);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+
+.filter-toggle:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: white;
+}
+
+.filter-toggle.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.filter-toggle:hover .filter-icon {
+  filter: brightness(0) invert(1); /* Gør billedet hvidt ved hover */
+}
+
+.filter-toggle.active .filter-icon {
+  filter: brightness(0) invert(1); /* Gør billedet hvidt når aktiv */
+}
+
+/* Filtrering badge (antal aktive filtre) */
+.filter-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--error);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* Filter panel dropdown */
+.filter-panel {
+  position: absolute;
+  top: 100%;
+  right: 2rem;
+  background: var(--bg);
+  border: 1px solid var(--secondary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 1.5rem;
+  min-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 1001;
+  display: none;
+}
+
+.filter-panel.open {
+  display: block;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-panel h3 {
+  margin: 0 0 1rem 0;
+  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-row label {
+  font-weight: 500;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.filter-row select,
+.filter-row input {
+  padding: 0.5rem;
+  border: 1px solid var(--secondary);
+  border-radius: calc(var(--radius) * 0.5);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.filter-row select:focus,
+.filter-row input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.range-inputs input {
+  flex: 1;
+}
+
+.range-inputs span {
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--secondary);
+}
+
+.clear-btn,
+.close-btn {
+  padding: 0.5rem 1rem;
+  border-radius: calc(var(--radius) * 0.5);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid;
+}
+
+.clear-btn {
+  background: transparent;
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.clear-btn:hover {
+  background: var(--error);
+  color: white;
+}
+
+.close-btn {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.close-btn:hover {
+  background: transparent;
+  color: var(--primary);
+}
+
+
+
+/* (main er allerede defineret ovenfor - dublet fjernet) */
+
+/* =====================
+   GAME GRID & CARDS
+   ===================== */
+/* TODO !!! */
+
+.game-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--secondary);
+}
+
+.game-card:focus {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+.game-poster {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  transition: var(--transition);
+}
+
+.game-card:hover .game-poster {
+  transform: scale(1.05);
+}
+
+.game-info {
+  padding: 1.5rem;
+}
+
+.game-info h2 {
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.game-genre {
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.game-rating {
+  color: var(--text);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.game-shelf {
+ color: var(--text-light); 
+ border: 2px solid var(--primary); /* Tykkelse, tekst og farve */
+ padding: 5px 30px; /* Afstand mellem tekst og kant */
+ display: inline-block; /* Så kanten passer præcist til teksten */
+ border-radius: 25px;
+ margin-bottom: 20px;
+}
+.rating-icon {
+  width: 25px;
+}
+
+/* Icon styling game cards (og detaljeside)*/
+.players-icon,
+.playtime-icon,
+.genre-icon,
+.age-icon, /* Detaljeside alders ikon */
+.difficulty-icon /* Detaljeside sværhedsgrad ikon */
+{
+  width: 25px;
+  margin-right: 10px;
+}
+
+/* Align game info items with icons */
+.game-players,
+.game-playtime,
+.game-genre {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+/* Favorite icon positioning */
+.favorite-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  padding: 6px;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* Touch-friendly minimum size */
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Active state for mobile touch feedback */
+.favorite-icon:active {
+  transform: scale(0.95);
+  background: rgba(240, 240, 240, 1);
+}
+
+/* =====================
+   GAME DIALOG
+   ===================== */
+dialog#game-dialog {
+  border: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+  max-width: min(95vw, 1000px);
+  max-height: 90vh;
+  background: var(--bg-card);
+  color: var(--text);
+  overflow: hidden;
+  position: fixed;
+  margin: auto;
+  width: min(95vw, 1000px);
+}
+
+
+dialog#game-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+#close-dialog {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 10;
+}
+
+#close-dialog:hover {
+  background: var(--error);
+  color: white;
+  transform: scale(1.1);
+}
+
+#dialog-content {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  overflow-y: auto;
+  max-height: 90vh;
+  text-align: center;
+}
+
+.game-poster-container {
+  position: relative; /* Positioning context for favorit-ikon */
+  display: inline-block;
+  margin: 20px auto;
+}
+
+#dialog-content img.game-poster {
+  width: auto;
+  height: auto;
+  max-height: 500px;
+  max-width: 400px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.game-description {
+  margin-top: 10px;
+  color: var(--text-light);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.dialog-game-info .game-shelf {
+ color: var(--text-light); 
+ border: 2px solid var(--primary);
+ padding: 5px 100px;
+ display: inline-block;
+ border-radius: 25px;
+ margin-bottom: 20px;
+ margin-top: 30px;
+}
+
+#dialog-content .game-rules {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  max-width: 90%;
+  margin: 1rem auto;
+  text-align: left;
+}
+
+/* Dialog ikoner i Grid layout */
+#dialog-content .game-icons-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto;
+  column-gap: 5rem;
+  margin: 1rem auto; /* Samme margin som game-rules */
+  justify-content: center;  /* centrér hele gridlayoutet */
+  justify-items: start; /* men behold venstrejusteret indhold */
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#dialog-content .game-icons-grid p {
+  margin-top: 10px;
+  display: flex;
+  color: var(--text);
+}
+
+/* Focus styles for keyboard navigation */
+.game-card:focus-visible,
+#close-dialog:focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+/* Styling af hjerte ikon på detaljeside - samme styling som game cards */
+
+#dialog-content .favorite-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  padding: 6px;
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  /* Touch-friendly minimum size */
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.favorite-icon:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Active state for mobile touch feedback */
+.favorite-icon:active {
+  transform: scale(0.95);
+  background: rgba(240, 240, 240, 1);
+}
+
+/* ==================
+   RESPONSIVT DESIGN
+   ================== */
+
+/* RESPONSIV HEADER */
+/* Table og mindre mobile enheder (Breakpoints) */
+@media (max-width: 768px) {
+  header {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    padding: 0.75rem 0;
+  }
+  .logo {
+    height: 60px;
+    margin-left: 0.5rem;
+  }
+  .header-location {
+    justify-self: center;
+  }
+  .header-location select {
+    min-width: 120px;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .header-controls {
+    gap: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .header-search input {
+    width: 120px;
+    font-size: 0.9rem;
+  }
+  .filter-panel {
+    right: 0.5rem;
+    left: 0.5rem;
+    min-width: auto;
+    max-width: none;
+  }
+  .filter-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Smartphones/iPhone (breakpoints) */
+@media (max-width: 480px) {
+   main {
+    padding-bottom: 5rem; /* Extra space for bottom nav on mobile */
+  }
+  header {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  .logo {
+    justify-self: center;
+    margin: 0;
+    height: 50px;
+  }
+  .header-location {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+  }
+  .header-controls {
+    position: absolute;
+    right: 1rem;
+    top: 0.75rem;
+    margin: 0;
+  }
+  .header-search input {
+    width: 100px;
+  }
+  .filter-panel {
+    padding: 1rem;
+  }
+}
+
+
+/* RESPONSIVT DESIGN FOR DIALOG MODALET */
+
+/* Tablet og større mobile enheder (breakpoints) */
+@media (max-width: 768px) {
+  #dialog-content {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
+    text-align: center;
+  }
+   .game-poster-container {
+    margin: 20px auto;
+  }
+   #dialog-content img.game-poster {
+    max-width: 300px;
+  }
+}
+
+/* Smartphones/iPhone (breakpoints) */
+@media (max-width: 480px) {
+  dialog#game-dialog {
+  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  border-radius: 0;
+  margin: 0;
+  }
+  #dialog-content {
+    padding: 1rem;
+    overflow-x: hidden;
+    word-wrap: break-word;
+  }
+  .game-poster-container {
+    margin: 20px auto;
+  }
+  #dialog-content img.game-poster {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+  }
+  #dialog-content .game-icons-grid {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+    max-width: 90%; /* Samme bredde som game-rules på mobile også */
+  }
+  #dialog-content .game-icons-grid p {
+    font-size: 0.8rem;
+    word-break: break-word;
+  }
+  #dialog-content h1 {
+    font-size: 1.5rem;
+    word-wrap: break-word;
+  }
+  #dialog-content .game-rules {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+}
+
+/* GAME GRID RESPONSIVE LAYOUT */
+
+/* Mobile først - 1 kolonne */   /* SLET?? */
+#game-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+} 
+
+/* Tablet - 2 kolonner */
+@media (min-width: 600px) {
+  #game-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+/* Desktop - 3 kolonner */
+@media (min-width: 992px) {
+  #game-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Store skærme - 4 kolonner */
+@media (min-width: 1400px) {
+  #game-list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* RESPONSIV FILTERBAR */
+@media (max-width: 768px) {
+  .filterbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .rating-filter {
+    justify-content: space-between;
+  }
+
+  .rating-filter input {
+    width: 100px;
+  }
+}
+
+/* BOTTOM NAVIGATION RESPONSIVE STYLING*/
+@media (max-width: 768px) {
+  .bottom-nav-item {
+    padding: 0.4rem 1rem;
+    margin: 0 0.25rem;
+    min-width: 70px;
+  }
+  
+  .bottom-nav-icon {
+    font-size: 1.25rem;
+    margin-bottom: 0.2rem;
+  }
+  
+  .bottom-nav-label {
+    font-size: 0.7rem;
+  }
+}
+
+/* NO FAVORITES RESPONSIVE STYLING */
+  @media (max-width: 768px) {
+  .no-favorites {
+   padding: 2rem 1rem;
+  }
+  
+  .no-favorites h3 {
+    font-size: 1.25rem;
+  }
+  
+  .no-favorites p {
+    font-size: 1rem;
+  }
+}
+
+/* =================================
+   SPILOVERSIGT STYLING (KARRUSSEL)
+   ================================= */
+
+.carousel-container {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: visible;  
+  /*margin: 2rem 0;*/
+  padding: 7rem 0;
+  max-width: 100vw;
+}
+
+#game-carousel {
+  display: flex;
+  gap: 1.5rem;
+  transition: transform 0.4s ease-in-out;
+  align-items: flex-end;
+  cursor: grab;
+  user-select: none;
+  width: max-content;
+}
+
+#game-carousel:active {
+  cursor: grabbing;
+}
+
+#game-carousel.dragging {
+  transition: none;
+}
+
+#game-carousel .game-card {
+  min-width: 150px;
+  max-width: 150px;
+  height: 300px;        /* Fast højde kun for karrussel-kort */
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transform: scale(1);  /* Normal størrelse som standard */
+  position: relative;
+  display: flex;        /* Flexbox kun for karrussel-kort */
+  flex-direction: column;
+}
+
+#game-carousel .game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);  /* Mørk overlay på normale kort */
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+#game-carousel .game-card.center {
+  transform: scale(1.5);  /* Center kort er 20% større */
+  z-index: 2;
+  min-width: 200px;        /* Matcher JavaScript centerCardWidth */
+  max-width: 200px;        /* Matcher JavaScript centerCardWidth */
+}
+
+#game-carousel .game-card.center::before {
+  opacity: 0;  /* Fjern overlay fra center kort */
+}
+
+#game-carousel .game-card.adjacent {
+  transform: scale(1.2);  /* Adjacent kort i normal størrelse */
+}
+
+#game-carousel .game-card.adjacent::before {
+  background: rgba(0, 0, 0, 0.15);  /* Lidt lysere overlay for adjacent kort */
+}
+
+#game-carousel .game-card:hover {
+  transform: scale(1.1);  /* Hover gør normale kort lidt større */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#game-carousel .game-card.center:hover {
+  transform: scale(1.65);  /* Hover gør center kort endnu større */
+}
+
+#game-carousel .game-card:hover::before {
+  opacity: 0.1;  /* Reducer overlay på hover for bedre visibility */
+}
+
+#game-carousel .game-poster {
+  width: 100%;
+  height: 250px;
+  object-fit: scale-down;
+  transition: all 0.3s ease;
+}
+
+#game-carousel .game-card.center .game-poster {
+  height: 280px;
+}
+
+#game-carousel .game-title {
+  padding: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+#game-carousel .game-title h3 {
+  font-size: 0.9rem;
+  color: white;
+  margin: 0;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+#game-carousel .game-card.center .game-title h3 {
+  color: var(--text);
+  text-shadow: none;
+}
+
+/* =================================
+   SPILOVERSIGT STYLING (ALLE SPIL–OVERSIGT)
+   ================================= */
+
+.games-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.sort-controls {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.sort-controls label {
+  font-weight: 500;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.sort-controls select {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 0.9rem;
+  min-width: 150px;
+}
+
+.sort-controls select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .games-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  
+  .games-header h2 {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+  
+  .sort-controls {
+    align-self: auto;
+    align-items: baseline;
+  }
+  
+  .sort-controls label {
+    font-size: 0.8rem;
+  }
+  
+  .sort-controls select {
+    font-size: 0.8rem;
+    min-width: 120px;
+    padding: 0.4rem;
+  }
+}

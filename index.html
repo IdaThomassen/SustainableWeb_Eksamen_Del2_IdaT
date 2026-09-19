@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Games App</title>
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="index.html">
+        <img
+          src="Images/Logo spilcafeen.png"
+          alt="Games App Logo"
+          class="logo"
+        />
+      </a>
+
+      <!-- Location filter i midten -->
+      <div class="header-location">
+        <select id="location-select" class="location-dropdown">
+          <option value="all">Alle lokationer</option>
+        </select>
+      </div>
+
+      <!-- Header søgefelt og filter -->
+      <div class="header-controls">
+        <div class="header-search">
+          <input
+            type="text"
+            id="header-search-input"
+            placeholder="Søg spil..."
+          />
+        </div>
+
+        <button
+          id="filter-toggle"
+          class="filter-toggle"
+          aria-label="Åbn filtre"
+        >
+          <img src="Images/Filtrerings ikon.png" alt="Filter" class="filter-icon" />
+          <span id="filter-badge" class="filter-badge" style="display: none"
+            >0</span
+          >
+        </button>
+      </div>
+
+      <!-- Filter dropdown panel -->
+      <div class="filter-panel" id="filter-panel">
+        <div class="filter-panel-content">
+          <h3>Filtrer spil</h3>
+
+          <div class="filter-row">
+            <label for="header-sort-select">Sorter efter</label>
+            <select id="header-sort-select">
+              <option value="all">Ingen sortering</option>
+              <option value="title">Titel (A-Å)</option>
+              <option value="title2">Titel (Å-A)</option>
+              <option value="rating">Mest populære</option>
+            </select>
+          </div>
+
+          <div class="filter-row">
+            <label for="header-genre-select">Kategori</label>
+            <select id="header-genre-select">
+              <option value="none">Alle kategorier</option>
+            </select>
+          </div>
+
+          <div class="filter-row">
+            <label>Antal spillere</label>
+            <div class="range-inputs">
+              <input
+                type="number"
+                id="header-players-from"
+                placeholder="Fra"
+                min="1"
+                max="8"
+                step="1"
+              />
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <label>Spilletid (min):</label>
+            <div class="range-inputs">
+              <input
+                type="number"
+                id="header-playtime-from"
+                placeholder="Fra"
+                min="0"
+                max="300"
+                step="15"
+              />
+              <span>til</span>
+              <input
+                type="number"
+                id="header-playtime-to"
+                placeholder="Til"
+                min="0"
+                max="300"
+                step="15"
+              />
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <label for="header-difficulty-select">Sværhedsgrad</label>
+            <select id="header-difficulty-select">
+              <option value="none">Alle sværhedsgrader</option>
+              <option value="Let">Let</option>
+              <option value="Mellem">Mellem</option>
+              <option value="Svær">Svær</option>
+            </select>
+          </div>
+
+          <div class="filter-row">
+            <label>Min. Alder</label>
+            <div class="range-inputs">
+              <input
+                type="number"
+                id="header-age-from"
+                placeholder="Fra"
+                min="0"
+                max="100"
+                step="1"
+              />
+            </div>
+          </div>
+
+          <div class="filter-row">
+            <label>Rating:</label>
+            <div class="range-inputs">
+              <input
+                type="number"
+                id="header-rating-from"
+                placeholder="Fra"
+                min="0"
+                max="5"
+                step="1"
+              />
+              <span>til</span>
+              <input
+                type="number"
+                id="header-rating-to"
+                placeholder="Til"
+                min="0"
+                max="5"
+                step="1"
+              />
+            </div>
+          </div>
+
+          <div class="filter-actions">
+            <button id="header-clear-filters" class="clear-btn">
+              Ryd alle filtre
+            </button>
+            <button id="filter-close" class="close-btn">Vis resultater</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h1>Mest populære</h1>
+      </section>
+
+      <!-- Game karrussel -->
+      <div class="carousel-container">
+        <section id="game-carousel"></section>
+      </div>
+
+      <section>
+        <div class="games-header">
+          <h1>Alle spil</h1>
+          <div class="sort-controls">
+            <select id="main-sort-select">
+              <option value="all">Sortér efter</option>
+              <option value="title">Titel (A-Å)</option>
+              <option value="title2">Titel (Å-A)</option>
+              <option value="rating">Mest populære</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- Aktiv filtrerings display -->
+      <section
+        class="active-filters-section"
+        id="active-filters-section"
+        style="display: none"
+      >
+        <div class="active-filters-container">
+          <div class="active-filters-list" id="active-filters-list">
+          </div>
+        </div>
+      </section>
+
+      <!-- Game List -->
+      <section id="game-list"></section>
+    </main>
+
+    <!-- Game Modal -->
+    <dialog id="game-dialog">
+      <form method="dialog">
+        <button id="close-dialog" aria-label="Close">✕</button>
+        <div id="dialog-content">
+          <!-- Game details will be injected here via JavaScript -->
+        </div>
+      </form>
+    </dialog>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="bottom-nav-item bottom-nav-active">
+        <div class="bottom-nav-icon">
+          <img src="Images/hus-farvet.svg" alt="Hjem" />
+        </div>
+      </a>
+      <a href="profilside.html" class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <img src="Images/bruger.svg" alt="Bruger" />
+        </div>
+      </a>
+      <a href="favoritside.html" class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <img src="Images/hejrte.svg" alt="Favoritter" />
+        </div>
+      </a>
+      <a href="burgermenu.html" class="bottom-nav-item">
+        <div class="bottom-nav-icon">
+          <img src="Images/burgermenu.svg" alt="Burgermenu" />
+        </div>
+      </a>
+    </nav>
+
+    <script src="js/app.js"></script>
+
+  </body>
+</html>
