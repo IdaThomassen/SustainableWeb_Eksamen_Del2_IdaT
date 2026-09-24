@@ -24,7 +24,7 @@ function initApp() {
   // ===== MAIN SORTERING =====
   // Sort dropdown ved siden af "Alle spil" overskriften - alternativ til header sort
   document.querySelector("#main-sort-select").addEventListener("change", filterGames);
-    
+  
 
   // ===== SPILLETID RANGE FILTRERING =====
   // "Fra" spilletid felt - auto-udfyldning af "til" felt
