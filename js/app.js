@@ -271,8 +271,6 @@ async function getGames() {
   populateGenreDropdown(); // Udfyld dropdown med genres <-----
   LocationDropdown(); // Udfyld dropdown med locations <-----
   displayGames(allGames);
-  populateCarousel(); // Tilføj top-rated games til karrussel
-  populateScrollCarousel(); // Tilføj nyere games til scroll-karrussel
   updateActiveFiltersDisplay(); // Initialiser aktive filtre display
 }
 
