@@ -141,12 +141,6 @@ p {
   flex-wrap: wrap;
 }
 
-.active-filters-label {
-  font-size: 0.9rem;
-  color: #666;
-  font-weight: 500;
-  white-space: nowrap;
-}
 
 .active-filters-list {
   display: flex;
@@ -197,9 +191,6 @@ p {
     gap: 0.5rem;
   }
   
-  .active-filters-label {
-    font-size: 0.8rem;
-  }
   
   .active-filter-tag {
     font-size: 0.8rem;
@@ -246,12 +237,7 @@ p {
   transition: var(--transition);
 }
 
-.bottom-nav-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-  transition: var(--transition);
-  text-align: center;
-}
+
 
 .bottom-nav-item:hover {
   color: var(--primary);
@@ -317,167 +303,6 @@ p {
 }
 
 
-/* ============================================================
-   FILTERBAR (SØG/SORT/FILTER/PLAYTIME/RATING-FILTER/RYD-KNAP)
-   ===================== */
-.filterbar {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-#search-input {
-  flex: 1;
-  min-width: 120px;
-}
-
-#search-input,
-#genre-select,
-#sort-select {
-  background: var(--bg-card);
-  color: var(--text-light);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-}
-
-#search-input:focus,
-#genre-select:focus,
-#sort-select:focus {
-  outline: 2px solid var(--secondary);
-  border-color: var(--secondary);
-}
-
-#search-input::placeholder {
-  color: var(--text-light);
-  opacity: 1;
-}
-
-#genre-select,
-#sort-select {
-  min-width: 160px;
-  cursor: pointer;
-}
-
-/* Playtime filter styling */
-.playtime-filter {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.playtime-filter label {
-  font-size: 0.875rem;
-  color: var(--text-light);
-  white-space: nowrap;
-}
-
-.playtime-filter input {
-  width: 80px;
-  background: var(--bg-card);
-  color: var(--text);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-}
-
-.playtime-filter input:focus {
-  outline: 2px solid var(--secondary);
-  border-color: var(--secondary);
-}
-
-/* Rating filter styling */
-.rating-filter {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.rating-filter label {
-  font-size: 0.875rem;
-  color: var(--text-light);
-  white-space: nowrap;
-}
-
-.rating-filter input {
-  width: 80px;
-  background: var(--bg-card);
-  color: var(--text-light);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-}
-
-.rating-filter input:focus {
-  outline: 2px solid var(--secondary);
-  border-color: var(--secondary);
-}
-
-/* Ryd-knap styling */
-
-#clear-filters {
-  background: var(--bg-card);
-  color: var(--text-light);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius);
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  font-weight: 500;
-}
-
-#clear-filters:hover {
-  background: var(--error);
-  color: white;
-  border-color: var(--error);
-  transform: translateY(-2px);
-}
-
-#clear-filters:focus {
-  outline: 2px solid var(--secondary);
-  border-color: var(--secondary);
-}
-
-.no-results {
-  text-align: center;
-  color: var(--text-light);
-  font-size: 1.2rem;
-  margin: 2rem 0;
-  padding: 2rem;
-  background: var(--bg-card);
-  border-radius: var(--radius);
-}
-/* Range grupper */
-.range-group {
-  flex: 1;
-}
-
-.range-label {
-  margin-bottom: 0.5rem;
-}
-
-.range-inputs {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.range-separator {
-  color: var(--secondary);
-  font-weight: bold;
-  font-size: 1.2rem;
-}
 
 /* ============================
    HEADER DESIGN OG FILTRERING
@@ -1256,9 +1081,7 @@ dialog#game-dialog::backdrop {
     margin-bottom: 0.2rem;
   }
   
-  .bottom-nav-label {
-    font-size: 0.7rem;
-  }
+  
 }
 
 /* NO FAVORITES RESPONSIVE STYLING */
