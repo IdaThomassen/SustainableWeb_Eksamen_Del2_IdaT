@@ -293,7 +293,7 @@ function displayGame(game) {
     : "Images/Favorit tomt ikon.png";
 
   const gameHTML = `
-    <article class="game-card">
+    <article class="game-card" tabindex="0">
         <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
         <img src="${favoriteIconSrc}" alt="Favorit" class="favorite-icon" onclick="toggleFavorite(event, '${game.title}')">
       <div class="game-info">
@@ -690,9 +690,7 @@ function removeFilter(filter) {
   }
 
   // Opdaterer filter badge efter fjernelse ved filter knapperne
-  if (window.updateFilterBadge) {
-    window.updateFilterBadge();
-  }
+  updateFilterBadge();
 
   // Kør filter igen for at opdatere listen
   filterGames();
