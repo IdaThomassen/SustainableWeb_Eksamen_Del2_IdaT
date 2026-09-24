@@ -748,12 +748,10 @@ p {
 
 
 
-/* (main er allerede defineret ovenfor - dublet fjernet) */
-
 /* =====================
    GAME GRID & CARDS
    ===================== */
-/* TODO !!! */
+
 
 .game-card {
   background: var(--bg-card);
@@ -816,9 +814,9 @@ p {
 
 .game-shelf {
  color: var(--text-light); 
- border: 2px solid var(--primary); /* Tykkelse, tekst og farve */
- padding: 5px 30px; /* Afstand mellem tekst og kant */
- display: inline-block; /* Så kanten passer præcist til teksten */
+ border: 2px solid var(--primary); 
+ padding: 5px 30px; 
+ display: inline-block; 
  border-radius: 25px;
  margin-bottom: 20px;
 }
@@ -988,9 +986,9 @@ dialog#game-dialog::backdrop {
   grid-template-columns: auto auto auto;
   grid-template-rows: auto auto;
   column-gap: 5rem;
-  margin: 1rem auto; /* Samme margin som game-rules */
-  justify-content: center;  /* centrér hele gridlayoutet */
-  justify-items: start; /* men behold venstrejusteret indhold */
+  margin: 1rem auto; 
+  justify-content: center; 
+  justify-items: start; 
   align-items: center;
   margin-bottom: 30px;
 }
@@ -1021,7 +1019,7 @@ dialog#game-dialog::backdrop {
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   padding: 6px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   /* Touch-friendly minimum size */

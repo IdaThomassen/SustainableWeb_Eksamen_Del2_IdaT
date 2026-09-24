@@ -8,7 +8,6 @@ let allGames = [];
 
 // ===== INITIALISERING =====
 function initApp() {
-  console.log("initApp: app.js is running 🎉");
   getGames(); // Hent alle games fra JSON og start applikationen
 
   // ===== HEADER SØGNING OG FILTRERING =====
@@ -27,13 +26,11 @@ function initApp() {
   
 
   // ===== SPILLETID RANGE FILTRERING =====
-  // "Fra" spilletid felt - auto-udfyldning af "til" felt
   document.querySelector("#header-playtime-from").addEventListener("input", function () {
-    const fromValue = this.value; // Hent den indtastede "fra" værdi
-    const toField = document.querySelector("#header-playtime-to"); // Find "til" feltet
+    const fromValue = this.value; 
+    const toField = document.querySelector("#header-playtime-to"); 
 
   // AUTOMATISK BEREGNING: Hver gang "Fra" ændres, sæt "Til" til +15 minutter
-  // Eksempel: Fra=30 → Til=45, Fra=60 → Til=75
       if (fromValue) {
         toField.value = parseInt(fromValue) + 15; // Konverterer til tal og læg 15 til
       } else {
@@ -41,65 +38,59 @@ function initApp() {
         toField.value = "";
       }
 
-      filterGames(); // Kører ny filtrering med opdaterede værdier
+      filterGames();
     });
 
-  // "Til" spilletid felt - manuel justering af spilletid range
   document.querySelector("#header-playtime-to").addEventListener("input", filterGames);
 
   // ===== RATING FELTER - AVANCERET SYNKRONISERING =====
-  // Rating "Fra" felt - tillader bruger fleksibilitet men sikrer logiske værdier
   document.querySelector("#header-rating-from").addEventListener("input", function () {
-    const fromValue = parseInt(this.value); // Konverter til tal (NaN(Not a number) hvis tomt)
+    const fromValue = parseInt(this.value); 
     const toField = document.querySelector("#header-rating-to");
-    const toValue = parseInt(toField.value); // Hent nuværende "Til" værdi
+    const toValue = parseInt(toField.value); 
 
   // SCENARIE 1: Bruger ændrer "Fra" og "Til" bliver for lav
-  // Eksempel: Fra=2→5, Til=3 → Fra=5, Til=5 (auto-justering)
     if (fromValue && toValue && toValue < fromValue) {
-        toField.value = fromValue; // Løft "Til" til samme niveau som "Fra"
+        toField.value = fromValue; 
         console.log(
           `📊 Rating auto-justering: Til løftet fra ${toValue} til ${fromValue}`
         );
       }
       // SCENARIE 2: Første gang "Fra" udfyldes (smart initialisering)
-      // Eksempel: Fra=tom→3, Til=tom → Fra=3, Til=4 (+1 for god range)
       else if (fromValue && !toField.value) {
-        toField.value = Math.min(5, fromValue + 1); // +1 men aldrig over max 5
+        toField.value = Math.min(5, fromValue + 1); 
         console.log(
           `📊 Rating initialisering: Fra=${fromValue}, Til=${toField.value}`
         );
       }
 
-      filterGames(); // Kør filtrering med nye værdier
+      filterGames(); 
     });
 
   // Rating "Til" felt - validerer at "Fra" ≤ "Til" reglen overholdes
   document
     .querySelector("#header-rating-to")
     .addEventListener("input", function () {
-      const toValue = parseInt(this.value); // Konverter til tal (NaN(Not a number) hvis tomt)
+      const toValue = parseInt(this.value); 
       const fromField = document.querySelector("#header-rating-from");
-      const fromValue = parseInt(fromField.value); // Hent nuværende "Fra" værdi
+      const fromValue = parseInt(fromField.value); 
 
       // SCENARIE 1: Bruger sætter "Til" lavere end "Fra" (ulovligt)
-      // Eksempel: Fra=4, Til=5→2 → Fra=2, Til=2 (auto-justering)
       if (toValue && fromValue && toValue < fromValue) {
-        fromField.value = toValue; // Sænk "Fra" til samme niveau som "Til"
+        fromField.value = toValue; 
         console.log(
           `📊 Rating validering: Fra sænket fra ${fromValue} til ${toValue}`
         );
       }
       // SCENARIE 2: Første gang "Til" udfyldes (smart initialisering)
-      // Eksempel: Fra=tom, Til=tom→4 → Fra=2, Til=4 (2-punkts range)
       else if (toValue && !fromField.value) {
-        fromField.value = Math.max(0, toValue - 2); // -2 for god range, men aldrig under 0
+        fromField.value = Math.max(0, toValue - 2); 
         console.log(
           `📊 Rating initialisering: Fra=${fromField.value}, Til=${toValue}`
         );
       }
 
-      filterGames(); // Kør filtrering med nye værdier
+      filterGames(); 
     });
 
   // Spillere felt
@@ -202,7 +193,6 @@ function initFilterPanel() {
       activeFilters++;
 
     // Check number inputs - men spilletid tæller kun som én filtrering
-    // Spilletid (tæller kun som ét filter hvis mindst et af felterne er udfyldt)
     if (
       document.querySelector("#header-playtime-from").value ||
       document.querySelector("#header-playtime-to").value
@@ -258,9 +248,6 @@ function initFilterPanel() {
 
 // ===== DATA HENTNING =====
 async function getGames() {
-  // Hent data fra JSON - husk at URL er anderledes!
-  // Gem data i allGames variablen
-  // Kald andre funktioner (hvilke?)
 
   console.log("🌐 Henter alle games fra JSON...");
   const response = await fetch(
@@ -268,18 +255,16 @@ async function getGames() {
   );
   allGames = await response.json();
   console.log(`📊 JSON data modtaget: ${allGames.length} games`);
-  populateGenreDropdown(); // Udfyld dropdown med genres <-----
-  LocationDropdown(); // Udfyld dropdown med locations <-----
+  populateGenreDropdown(); 
+  LocationDropdown(); 
   displayGames(allGames);
-  updateActiveFiltersDisplay(); // Initialiser aktive filtre display
+  updateActiveFiltersDisplay(); 
 }
 
 // ===== VISNING =====  // Vis alle games - loop gennem og kald displayGame() for hver game
 function displayGames(games) {
   console.log(` Viser ${games.length} games`);
-  // Nulstil #game-list HTML'en
   document.querySelector("#game-list").innerHTML = "";
-  // Gennemløb alle games og kør displayGame-funktionen for hver game
   for (const game of games) {
     displayGame(game);
   }
@@ -323,8 +308,6 @@ function displayGame(game) {
     }
   });
 }
-// Husk: game.players er et OBJECT!
-// Er der andre properties, du skal tænke over?
 
 // ===== FILTRERING =====
 
@@ -371,7 +354,6 @@ function LocationDropdown() {
 }
 
 function filterGames() {
-  // Filtrer games baseret på søgning, genre, playtime, ovs. // OBS: game.genre skal sammenlignes med === (ikke .includes())
 
   // Search variable - header
   const searchValue = document
@@ -384,7 +366,6 @@ function filterGames() {
   // Sorterings variable - tjek begge sort dropdowns
   const headerSortValue = document.querySelector("#header-sort-select").value;
   const mainSortValue = document.querySelector("#main-sort-select").value;
-  // Brug main sort som primær, fallback til header sort
   const sortValue = mainSortValue !== "all" ? mainSortValue : headerSortValue;
 
   // Location variable - fra header
@@ -397,7 +378,6 @@ function filterGames() {
   const playtimeToInput = document.querySelector("#header-playtime-to").value;
 
   const playtimeFrom = Number(playtimeFromInput) || 0;
-  // Hvis kun "Fra" er udfyldt, sæt automatisk "Til" til +15 min
   let playtimeTo;
   if (playtimeFromInput && !playtimeToInput) {
     playtimeTo = Number(playtimeFromInput) + 15;
@@ -452,8 +432,7 @@ function filterGames() {
   // TRIN 4: Playtime filter
   if (playtimeFrom > 0 || playtimeTo < 9999) {
     filteredGames = filteredGames.filter((game) => {
-      // Antag at game.playtime er i minutter (f.eks. "30-60" eller "45")
-      const playtime = parseInt(game.playtime); // Tag første nummer
+      const playtime = parseInt(game.playtime); 
       return playtime >= playtimeFrom && playtime <= playtimeTo;
     });
   }
@@ -468,7 +447,6 @@ function filterGames() {
   // TRIN 6: Antal spillere filter
   if (playersFrom > 0) {
     filteredGames = filteredGames.filter((game) => {
-      // Tjek om den indtastede værdi ligger inden for spillets min-max spænd
       return playersFrom >= game.players.min && playersFrom <= game.players.max;
     });
   }
@@ -498,7 +476,7 @@ function filterGames() {
 
   console.log(`✅ Viser ${filteredGames.length} games`);
   displayGames(filteredGames);
-  updateActiveFiltersDisplay(); // Opdater aktive filtre display
+  updateActiveFiltersDisplay(); 
 }
 
 // ===== AKTIVE FILTRE FUNKTIONALITET =====
@@ -580,7 +558,6 @@ function getActiveFilters() {
   const playtimeTo = document.querySelector("#header-playtime-to").value;
   if (playtimeFrom || playtimeTo) {
     const fromText = playtimeFrom || "0";
-    // Hvis kun "Fra" er udfyldt, tilføj automatisk +15 min til "Til"
     let toText;
     if (playtimeFrom && !playtimeTo) {
       toText = (parseInt(playtimeFrom) + 15).toString();
@@ -733,7 +710,7 @@ function clearAllFilters() {
 
 // Håndter favorit klik
 function toggleFavorite(event, gameTitle) {
-  event.stopPropagation(); // Forhindrer at game card også bliver klikket
+  event.stopPropagation(); 
   const favoriteIcon = event.target;
 
   // Hent eksisterende favoritter fra localStorage
@@ -742,7 +719,6 @@ function toggleFavorite(event, gameTitle) {
   // Toggle mellem tomt og fyldt hjerte
   if (favoriteIcon.src.includes("Favorit tomt ikon.png")) {
     favoriteIcon.src = "Images/Favorit fyldt ikon.png";
-    // Tilføj til favoritter
     if (!favorites.includes(gameTitle)) {
       favorites.push(gameTitle);
       saveFavorites(favorites);
@@ -750,7 +726,6 @@ function toggleFavorite(event, gameTitle) {
     console.log(`❤️ Tilføjet til favoritter: ${gameTitle}`);
   } else {
     favoriteIcon.src = "Images/Favorit tomt ikon.png";
-    // Fjern fra favoritter
     favorites = favorites.filter((title) => title !== gameTitle);
     saveFavorites(favorites);
     console.log(`💔 Fjernet fra favoritter: ${gameTitle}`);
@@ -791,7 +766,6 @@ function isFavorite(gameTitle) {
 }
 
 // Vis (alle) game detaljer i modal
-// Hvilke felter har et game? (Se JSON strukturen)
 
 function showGameModal(game) {
   console.log("🎭 Åbner modal for:", game.title);
