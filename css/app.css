@@ -88,7 +88,6 @@ body {
   flex-direction: column;
 }
 
-/* Prevent background scroll when modal is open */
 
 main {
   max-width: min(1400px, 95vw);
@@ -921,15 +920,21 @@ dialog#game-dialog::backdrop {
 
 /* Smartphones/iPhone (breakpoints) */
 @media (max-width: 480px) {
-   main {
-    padding-bottom: 5rem; /* Extra space for bottom nav on mobile */
+  main {
+    padding-top: 11rem;
+    padding-bottom: 5rem;
   }
+
+  h1 {
+  font-size: 1.5rem;
+}
+
   header {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    gap: 0.5rem;
-    text-align: center;
-  }
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 0.5rem;
+  text-align: center;
+}
   .logo {
     justify-self: center;
     margin: 0;
@@ -941,13 +946,14 @@ dialog#game-dialog::backdrop {
     justify-self: center;
   }
   .header-controls {
-    position: absolute;
-    right: 1rem;
-    top: 0.75rem;
-    margin: 0;
-  }
+  position: static;
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: center;
+  margin: 0;
+}
   .header-search input {
-    width: 100px;
+    width: 180px;
   }
   .filter-panel {
     padding: 1rem;
@@ -1020,7 +1026,6 @@ dialog#game-dialog::backdrop {
 
 /* GAME GRID RESPONSIVE LAYOUT */
 
-/* Mobile først - 1 kolonne */   /* SLET?? */
 #game-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1071,17 +1076,15 @@ dialog#game-dialog::backdrop {
 /* BOTTOM NAVIGATION RESPONSIVE STYLING*/
 @media (max-width: 768px) {
   .bottom-nav-item {
-    padding: 0.4rem 1rem;
-    margin: 0 0.25rem;
-    min-width: 70px;
+    padding: 0.3rem 0.75rem;
+    margin: 0 0.15rem;
+    min-width: 60px;
   }
-  
+
   .bottom-nav-icon {
-    font-size: 1.25rem;
-    margin-bottom: 0.2rem;
-  }
-  
-  
+    font-size: 1.1rem;
+    margin-bottom: 0.15rem;
+  }  
 }
 
 /* NO FAVORITES RESPONSIVE STYLING */
