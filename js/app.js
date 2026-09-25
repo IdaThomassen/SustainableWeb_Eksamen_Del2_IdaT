@@ -265,13 +265,14 @@ async function getGames() {
 function displayGames(games) {
   console.log(` Viser ${games.length} games`);
   document.querySelector("#game-list").innerHTML = "";
-  for (const game of games) {
-    displayGame(game);
-  }
+
+  games.forEach((game, index) => {
+    displayGame(game, index);
+  });
 }
 
 // Vis ÉT game card til game list
-function displayGame(game) {
+function displayGame(game, index) {
   const gameList = document.querySelector("#game-list");
   const favoriteIconSrc = isFavorite(game.title)
     ? "Images/Favorit fyldt ikon.png"
@@ -279,14 +280,26 @@ function displayGame(game) {
 
   const gameHTML = `
     <article class="game-card" tabindex="0">
-        <img src="${game.image}" alt="Poster of ${game.title}" class="game-poster" />
-        <img src="${favoriteIconSrc}" alt="Favorit" class="favorite-icon" onclick="toggleFavorite(event, '${game.title}')">
+        <img src="${game.image}"alt="Poster of ${game.title}"class="game-poster"${index >= 7 ? 'loading="lazy"' : ""}/>
+        <img src="${favoriteIconSrc}" alt="Favorit" class="favorite-icon" onclick="toggleFavorite(event, '${
+    game.title
+  }')">
       <div class="game-info">
-        <h2>${game.title} <span class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</span></h2>
+        <h2>${
+          game.title
+        } <span class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${
+    game.rating
+  }</span></h2>
         <p class="game-shelf">Hylde ${game.shelf}</p>
-        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</p>
-        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter </p>
-        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</p>  
+        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon"> ${
+          game.players.min
+        }-${game.players.max} spillere</p>
+        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${
+          game.playtime
+        } minutter </p>
+        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${
+          game.genre
+        }</p>  
       </div>
     </article>
   `;
