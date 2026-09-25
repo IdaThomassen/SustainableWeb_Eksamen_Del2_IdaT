@@ -326,6 +326,7 @@ p {
 
 .logo {
   height: 80px;
+  width: auto;
   margin-left: 1rem;
   justify-self: start;
 }

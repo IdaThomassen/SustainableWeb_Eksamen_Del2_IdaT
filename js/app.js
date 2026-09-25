@@ -280,24 +280,26 @@ function displayGame(game, index) {
 
   const gameHTML = `
     <article class="game-card" tabindex="0">
-        <img src="${game.image}"alt="Poster of ${game.title}"class="game-poster"${index >= 7 ? 'loading="lazy"' : ""}/>
+        <img src="${game.image}"alt="Poster of ${
+    game.title
+  }"class="game-poster"${index >= 7 ? 'loading="lazy"' : ""}/>
         <img src="${favoriteIconSrc}" alt="Favorit" class="favorite-icon" onclick="toggleFavorite(event, '${
     game.title
   }')">
       <div class="game-info">
         <h2>${
           game.title
-        } <span class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${
+        } <span class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon" width="25" height="25"> ${
     game.rating
   }</span></h2>
         <p class="game-shelf">Hylde ${game.shelf}</p>
-        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon"> ${
+        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon" width="25" height="25"> ${
           game.players.min
         }-${game.players.max} spillere</p>
-        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${
+        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon" width="25" height="25"> ${
           game.playtime
         } minutter </p>
-        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${
+        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon" width="25" height="25"> ${
           game.genre
         }</p>  
       </div>
@@ -799,10 +801,10 @@ function showGameModal(game) {
       <h2 class="game-description">${game.description}</h2>
       <p class="game-shelf">Hylde ${game.shelf}</p>
       <div class="game-icons-grid">
-        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon"> ${game.genre}</p> 
-        <p class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon"> ${game.rating}</p>
-        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon"> ${game.players.min}-${game.players.max} spillere</p>
-        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon"> ${game.playtime} minutter </p>
+        <p class="game-genre"><img src="Images/Kategori ikon.png" alt="Genre" class="genre-icon" width="25" height="25"> ${game.genre}</p> 
+        <p class="game-rating"><img src="Images/Stjerne ikon.png" alt="Rating" class="rating-icon" width="25" height="25"> ${game.rating}</p>
+        <p class="game-players"><img src="Images/Spillere ikon.png" alt="Players" class="players-icon" width="25" height="25"> ${game.players.min}-${game.players.max} spillere</p>
+        <p class="game-playtime"><img src="Images/Tid ikon.png" alt="Playtime" class="playtime-icon" width="25" height="25"> ${game.playtime} minutter </p>
         <p class="game-age"><img src="Images/Alder ikon.png" alt="Age" class="age-icon"> ${game.age}+</p>
         <p class="game-difficulty"><img src="Images/Sværhedsgrad ikon.png" alt="Difficulty" class="difficulty-icon"> ${game.difficulty}</p>
       </div>
