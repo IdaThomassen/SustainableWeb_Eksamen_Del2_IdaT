@@ -10,7 +10,7 @@
 
   /* Text - Dark Mode Colors */
   --text: #1E1B1B;
-  --text-light: #1E1B1B;  /*Bruges ikke*/
+  --text-light: #1E1B1B;  
 
   /* Backgrounds - Dark Mode */
   --bg: #f3f0f0;
@@ -1056,22 +1056,6 @@ dialog#game-dialog::backdrop {
   }
 }
 
-/* RESPONSIV FILTERBAR */
-@media (max-width: 768px) {
-  .filterbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
-
-  .rating-filter {
-    justify-content: space-between;
-  }
-
-  .rating-filter input {
-    width: 100px;
-  }
-}
 
 /* BOTTOM NAVIGATION RESPONSIVE STYLING*/
 @media (max-width: 768px) {
@@ -1120,12 +1104,6 @@ dialog#game-dialog::backdrop {
   display: flex;
   align-items: baseline;
   gap: 0.5rem;
-}
-
-.sort-controls label {
-  font-weight: 500;
-  color: var(--text);
-  font-size: 0.9rem;
 }
 
 .sort-controls select {
