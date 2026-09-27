@@ -956,7 +956,17 @@ dialog#game-dialog::backdrop {
     width: 180px;
   }
   .filter-panel {
+    position: absolute;
+    top: 100%;
+    left: 0.5rem;
+    right: 0.5rem;
+
     padding: 1rem;
+    min-width: 0;
+    max-width: none;
+
+    max-height: calc(100vh - 220px);
+    overflow-y: auto;
   }
 }
 
